@@ -95,5 +95,43 @@ namespace MaxSudoku
             return true;
         }
 
+        /// <summary>
+        /// Checks sub-squares to see if they follow Sudoku rules (no duplicate non-zero values).
+        /// </summary>
+        /// <param name="board">2D integer array representing the board.</param>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="cols">Number of columns.</param>
+        /// <returns>True if all sub-squares have no duplicates; otherwise, false.</returns>
+        public bool ValidateBoxes(int[,] board, int rows, int cols)
+        {
+            // to keep things generic i included both the rows and columns.
+            // (if some funny guy will decide to do a non-square sudoku).
+            if (rows != cols) return true;
+            double sqrt = Math.Sqrt(rows);
+            if (sqrt != (int)sqrt) return true;
+            int subSize = (int)sqrt;
+
+            for (int boxRow = 0; boxRow < subSize; boxRow++)
+            {
+                for (int boxCol = 0; boxCol < subSize; boxCol++)
+                {
+                    var seen = new HashSet<int>();
+                    int startRow = boxRow * subSize;
+                    int startCol = boxCol * subSize;
+                    for (int row = startRow; row < startRow + subSize; row++)
+                    {
+                        for (int col = startCol; col < startCol + subSize; col++)
+                        {
+                            int val = board[row, col];
+                            if (val != 0 && !seen.Add(val))
+                                // if a number exists when trying to add it, will return false.
+                                return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }
