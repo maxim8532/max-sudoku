@@ -17,9 +17,9 @@ namespace MaxSudoku
         bool IsValidString(string data);
 
         /// <summary>
-        /// Checks if the given row and column are within the board's valid range.
+        /// Checks if the given cell value are within the board's valid range.
         /// </summary>
-        bool ValidateCellsRange(int row, int col, int rows, int cols);
+        bool ValidateCellRange(int cellValue, int minValue, int maxValue);
 
         /// <summary>
         /// Checks if the given data string size is correct for filling a board of specified size. 

@@ -8,6 +8,8 @@ namespace MaxSudoku
 {
     public class SudokuValidator : BoardValidator
     {
+
+
         /// <summary>
         /// Checks if the given data string contains only valid characters (digits, '.' or '0').
         /// </summary>
@@ -24,17 +26,17 @@ namespace MaxSudoku
         }
 
         /// <summary>
-        /// Checks if the given row and column are within the board's valid range.
+        /// Checks if the given cell value are within the board's valid range.
         /// </summary>
-        /// <param name="row">Row index to check.</param>
-        /// <param name="col">Column index to check.</param>
-        /// <param name="rows">Number of rows in the board.</param>
-        /// <param name="cols">Number of columns in the board.</param>
-        /// <returns>True if (row, col) is within valid range. Otherwise, false.</returns>
-        public bool ValidateCellsRange(int row, int col, int rows, int cols)
+        /// <param name="cellValue">Cell value to check.</param>
+        /// <param name="minValue">Minimum value of </param>
+        /// <param name="maxValue">Number of rows in the board.</param>
+        /// <returns>True if cell is within valid range. Otherwise, false.</returns>
+        public bool ValidateCellRange(int cellValue, int minValue, int maxValue)
         {
-            if (row < 0 || row >= rows) return false;
-            if (col < 0 || col >= cols) return false;
+            if (cellValue < minValue || cellValue > maxValue){
+                return false;
+                }
             return true;
         }
 
