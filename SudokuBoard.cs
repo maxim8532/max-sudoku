@@ -36,12 +36,10 @@ namespace MaxSudoku
         public override void FillBoard(string data)
         {
             if (!validator.ValidateStringSize(data, BoardSize, BoardSize))
-                // TODO: Add a custom exception.
-                throw new ArgumentException($"Input length must be {BoardSize * BoardSize} for a {BoardSize}x{BoardSize} Sudoku board.");
+                throw new InvalidInputException($"Input length must be {BoardSize * BoardSize} for a {BoardSize}x{BoardSize} Sudoku board.");
 
             if (!validator.IsValidString(data))
-                // TODO: Add a custom exception.
-                throw new ArgumentException("Input contains invalid characters for a Sudoku puzzle " +
+                throw new InvalidInputException("Input contains invalid characters for a Sudoku puzzle " +
                     "(only digits, ASCII values within range, '.' or '0').");
 
             int inputIndex = 0;
@@ -55,8 +53,7 @@ namespace MaxSudoku
                     if (cellValue != 0)
                     {
                         if (!validator.ValidateCellRange(cellValue, MIN_CELL_VALUE, BoardSize))
-                            // TODO: Add a custom exception.
-                            throw new ArgumentException($"Cell char '{ch}' - {cellValue} is out of [{MIN_CELL_VALUE} - {BoardSize}] range.");
+                            throw new InvalidInputException($"Cell char '{ch}' - {cellValue} is out of [{MIN_CELL_VALUE} - {BoardSize}] range.");
                     }
 
                     board[row, col] = cellValue;
