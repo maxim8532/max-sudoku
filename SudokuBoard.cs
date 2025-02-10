@@ -33,6 +33,9 @@ namespace MaxSudoku
         /// Also checks string length, allowed chars, and numeric range.
         /// </summary>
         /// <param name="data">String of length BoardSize*BoardSize containing Sudoku puzzle chars.</param>
+        /// <exception cref="InvalidInputException">
+        /// Thrown when the data string contains chars that are invalid.
+        /// </exception>
         public override void FillBoard(string data)
         {
             if (!validator.ValidateStringSize(data, BoardSize, BoardSize))
@@ -61,9 +64,22 @@ namespace MaxSudoku
             }
         }
 
+        /// <summary>
+        /// Checks if the board is fully filled (no zero cells).
+        /// </summary>
+        /// <returns>True if no cell is zero, otherwise false.
+        /// </returns>
         public override bool IsFull()
         {
-            throw new NotImplementedException();
+            for (int row = 0; row < BoardSize; row++)
+            {
+                for (int col = 0; col < BoardSize; col++)
+                {
+                    if (board[row, col] == 0)
+                        return false;
+                }
+            }
+            return true;
         }
 
         /// <summary>
