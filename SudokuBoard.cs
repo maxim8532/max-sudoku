@@ -112,6 +112,24 @@ namespace MaxSudoku
                 return 0;
             return c - '0';
         }
+
+        /// <summary>
+        /// Overrides ToString and converts the board int cells to char and combines them to a string.
+        /// </summary>
+        /// <returns>String thar represents the cells in the board</returns>
+        public override string ToString()
+        {
+            string stringBoard = "";
+            for (int i = 0; i < BoardSize; i++)
+            {
+                for (int j = 0; j < BoardSize; j++)
+                {
+                    int cellValue = board[i, j];
+                    stringBoard += (char)(cellValue + '0');
+                }
+            }
+            return stringBoard;
+        }
     }
 
 }
