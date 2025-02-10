@@ -84,6 +84,25 @@ namespace MaxSudoku
         }
 
         /// <summary>
+        /// Validates the board by checking rows, columns, and blocks
+        /// throwing InvalidSudokuBoardException if a rule is violated.
+        /// </summary>
+        /// <exception cref="InvalidBoardException">
+        /// Thrown when the board doesn't follow the rules of the Sudoku.
+        /// </exception>
+        public void ValidateBoard()
+        {
+            if (!validator.ValidateRows(board, BoardSize, BoardSize))
+                throw new InvalidBoardException("Row validation failed, duplicate cell values found within the same row.");
+
+            if (!validator.ValidateColumns(board, BoardSize, BoardSize))
+                throw new InvalidBoardException("Column validation failed, duplicate cell values found within the same column.");
+
+            if (!validator.ValidateBlocks(board, BoardSize, BoardSize))
+                throw new InvalidBoardException("Block validation failed, duplicate cell values found. within the same block.");
+        }
+
+        /// <summary>
         /// Converts '.' or '0' to 0, else gets the numeric ASCII value of the char.
         /// </summary>
         /// <param name="c">char from a string.</param>
