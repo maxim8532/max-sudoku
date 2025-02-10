@@ -28,9 +28,40 @@ namespace MaxSudoku
             this.validator = validator;
         }
 
+        /// <summary>
+        /// Fills the board from a data string after parsing it. 
+        /// Also checks string length, allowed chars, and numeric range.
+        /// </summary>
+        /// <param name="data">String of length BoardSize*BoardSize containing Sudoku puzzle chars.</param>
         public override void FillBoard(string data)
         {
-            throw new NotImplementedException();
+            if (!validator.ValidateStringSize(data, BoardSize, BoardSize))
+                // TODO: Add a custom exception.
+                throw new ArgumentException($"Input length must be {BoardSize * BoardSize} for a {BoardSize}x{BoardSize} Sudoku board.");
+
+            if (!validator.IsValidString(data))
+                // TODO: Add a custom exception.
+                throw new ArgumentException("Input contains invalid characters for a Sudoku puzzle " +
+                    "(only digits, ASCII values within range, '.' or '0').");
+
+            int inputIndex = 0;
+            for (int row = 0; row < BoardSize; row++)
+            {
+                for (int col = 0; col < BoardSize; col++)
+                {
+                    char ch = data[inputIndex++];
+                    int cellValue = ParseChar(ch);
+
+                    if (cellValue != 0)
+                    {
+                        if (!validator.ValidateCellRange(cellValue, MIN_CELL_VALUE, BoardSize))
+                            // TODO: Add a custom exception.
+                            throw new ArgumentException($"Cell char '{ch}' - {cellValue} is out of [{MIN_CELL_VALUE} - {BoardSize}] range.");
+                    }
+
+                    board[row, col] = cellValue;
+                }
+            }
         }
 
         public override bool IsFull()
