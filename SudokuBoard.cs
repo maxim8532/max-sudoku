@@ -67,7 +67,8 @@ namespace MaxSudoku
         /// <summary>
         /// Checks if the board is fully filled (no zero cells).
         /// </summary>
-        /// <returns>True if no cell is zero, otherwise false.
+        /// <returns>
+        /// True if no cell is zero, otherwise false.
         /// </returns>
         public override bool IsFull()
         {
