@@ -37,5 +37,63 @@ namespace MaxSudoku
             if (col < 0 || col >= cols) return false;
             return true;
         }
+
+        /// <summary>
+        /// Checks if the data string's length is at the right length.
+        /// </summary>
+        /// <param name="data">String representing board data.</param>
+        /// <param name="rows">Number of rows in the board.</param>
+        /// <param name="cols">Number of columns in the board.</param>
+        public bool ValidateStringSize(string data, int rows, int cols)
+        {
+            return data.Length == rows * cols;
+        }
+
+        /// <summary>
+        /// Checks rows to see if they follow Sudoku rules (no duplicate non-zero values).
+        /// </summary>
+        /// <param name="board">Matrix representing the board.</param>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="cols">Number of columns.</param>
+        /// <returns>True if no row contains duplicates. Otherwise, false.</returns>
+        public bool ValidateRows(int[,] board, int rows, int cols)
+        {
+            for (int r = 0; r < rows; r++)
+            {
+                var seen = new HashSet<int>();
+                for (int c = 0; c < cols; c++)
+                {
+                    int val = board[r, c];
+                    if (val != 0 && !seen.Add(val))
+                        // if a number exists when trying to add it, will return false.
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Checks columns to see if they follow Sudoku rules (no duplicate non-zero values).
+        /// </summary>
+        /// <param name="board">Matrix representing the board.</param>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="cols">Number of columns.</param>
+        /// <returns>True if no column contains duplicates. Otherwise, false.</returns>
+        public bool ValidateColumns(int[,] board, int rows, int cols)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                var seen = new HashSet<int>();
+                for (int r = 0; r < rows; r++)
+                {
+                    int val = board[r, c];
+                    if (val != 0 && !seen.Add(val))
+                        // if a number exists when trying to add it, will return false.
+                        return false;
+                }
+            }
+            return true;
+        }
+
     }
 }
