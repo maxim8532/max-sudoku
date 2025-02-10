@@ -98,31 +98,31 @@ namespace MaxSudoku
         }
 
         /// <summary>
-        /// Checks sub-squares to see if they follow Sudoku rules (no duplicate non-zero values).
+        /// Checks sub-squares(blocks) to see if they follow Sudoku rules (no duplicate non-zero values).
         /// </summary>
         /// <param name="board">2D integer array representing the board.</param>
         /// <param name="rows">Number of rows.</param>
         /// <param name="cols">Number of columns.</param>
         /// <returns>True if all sub-squares have no duplicates; otherwise, false.</returns>
-        public bool ValidateBoxes(int[,] board, int rows, int cols)
+        public bool ValidateBlocks(int[,] board, int rows, int cols)
         {
             // to keep things generic i included both the rows and columns.
             // (if some funny guy will decide to do a non-square sudoku).
             if (rows != cols) return true;
             double sqrt = Math.Sqrt(rows);
             if (sqrt != (int)sqrt) return true;
-            int subSize = (int)sqrt;
+            int blockSize = (int)sqrt;
 
-            for (int boxRow = 0; boxRow < subSize; boxRow++)
+            for (int blockRow = 0; blockRow < blockSize; blockRow++)
             {
-                for (int boxCol = 0; boxCol < subSize; boxCol++)
+                for (int blockCol = 0; blockCol < blockSize; blockCol++)
                 {
                     var seen = new HashSet<int>();
-                    int startRow = boxRow * subSize;
-                    int startCol = boxCol * subSize;
-                    for (int row = startRow; row < startRow + subSize; row++)
+                    int startRow = blockRow * blockSize;
+                    int startCol = blockCol * blockSize;
+                    for (int row = startRow; row < startRow + blockSize; row++)
                     {
-                        for (int col = startCol; col < startCol + subSize; col++)
+                        for (int col = startCol; col < startCol + blockSize; col++)
                         {
                             int val = board[row, col];
                             if (val != 0 && !seen.Add(val))

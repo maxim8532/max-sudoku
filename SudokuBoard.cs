@@ -7,51 +7,26 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku
 {
-    internal class SudokuBoard
+    internal class SudokuBoard : BoardGame
     {
-        private int boardSize;
-        private int[,] board;
+        private const int MIN_CELL_VALUE = 1;
+        private SudokuValidator validator;
 
-        public SudokuBoard(int boardSize)
+        /// <summary>
+        /// Gets the size of the Sudoku board (rows = cols = boardSize).
+        /// </summary>
+        public int BoardSize => rows;
+
+
+        /// <summary>
+        /// Constructor that creates a Sudoku board of size x size, using a SudokuValidator for checks.
+        /// </summary>
+        /// <param name="size">Dimension of the board.</param>
+        /// <param name="validator">An instance of SudokuValidator.</param>
+        public SudokuBoard(int boardSize, SudokuValidator validator) : base(boardSize, boardSize)
         {
-            this.boardSize = boardSize;
+            this.validator = validator;
         }
-
-        public void FillBoard(string sudokuString)
-        {
-            int row = 0;
-            int col = 0;
-            foreach (char c in sudokuString)
-            {
-                board[row, col] = (byte)(c - '0');
-                col++;
-                if (col == boardSize)
-                {
-                    col = 0;
-                    row++;
-                }
-            }
-        }
-
-        public int GetCell(int row, int col)
-        {
-            return board[row, col];
-        }
-
-        public void SetCell(int row, int col, int value)
-        {
-            board[row, col] = value;
-        }
-
-
-
-
-
-
-
-
-
-
     }
 
 }
