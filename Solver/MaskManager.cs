@@ -33,6 +33,15 @@ namespace MaxSudoku.Solver
             colMask = new int[boardSize];
             blockMask = new int[boardSize];
         }
+
+        /// <summary>
+        /// Calculates the block index for a given cell position.
+        /// </summary>
+        /// <param name="row">Row index of the cell</param>
+        /// <param name="col">Column index of the cell</param>
+        /// <returns>Index of the block containing the cell</returns>
+        public int GetBlockIndex(int row, int col) =>
+            (row / blockSize) * blockSize + (col / blockSize);
     }
     
 }
