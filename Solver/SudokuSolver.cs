@@ -44,6 +44,8 @@ namespace MaxSudoku.Solver
         {
             try
             {
+                if (!PreCheck()) { Console.WriteLine("pre check catch"); }
+                else { Console.WriteLine("NO pre check catch"); }
                 bool result = SolveRecursive();
                 if (result)
                 {
@@ -56,7 +58,24 @@ namespace MaxSudoku.Solver
                 return false;
             }
         }
-
+        private bool PreCheck()
+        {
+            for (int r = 0; r < boardSize; r++)
+            {
+                for (int c = 0; c < boardSize; c++)
+                {
+                    if (board.GetCell(r, c) == 0)
+                    {
+                        int candidates = maskManager.GetAvailableDigits(r, c);
+                        if (candidates == 0)
+                        {
+                            return false;  // This cell cannot be filled; board is unsolvable.
+                        }
+                    }
+                }
+            }
+            return true;
+        }
 
         /// <summary>
         /// Recursive solving method that uses backtracking with bit manipulations.
