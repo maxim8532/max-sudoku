@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Solver
 {
-    internal class MaskManager
+    public class MaskManager
     {
         private readonly int boardSize;
         private readonly int blockSize;
