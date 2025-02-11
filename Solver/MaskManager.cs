@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaxSudoku.Board;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,6 +68,26 @@ namespace MaxSudoku.Solver
                 rowMask[row] &= ~bit;
                 colMask[col] &= ~bit;
                 blockMask[GetBlockIndex(row, col)] &= ~bit;
+            }
+        }
+
+
+        /// <summary>
+        /// Updates masks from an existing board state.
+        /// </summary>
+        /// <param name="board">The Sudoku board to initialize the masks from.</param>
+        public void UpdateFromBoard(SudokuBoard board)
+        {
+            for (int row = 0; row < boardSize; row++)
+            {
+                for (int col = 0; col < boardSize; col++)
+                {
+                    int num = board.GetCell(row, col);
+                    if (num != 0)
+                    {
+                        UpdateMasks(row, col, num, isPlacing: true);
+                    }
+                }
             }
         }
 
