@@ -18,6 +18,7 @@ namespace MaxSudoku.Solver
         private readonly int[] colMask;
         private readonly int[] blockMask;
 
+
         /// <summary>
         /// Constructor for a new instance of the MaskManager class.
         /// </summary>
@@ -34,6 +35,7 @@ namespace MaxSudoku.Solver
             blockMask = new int[boardSize];
         }
 
+
         /// <summary>
         /// Calculates the block index for a given cell position.
         /// </summary>
@@ -42,6 +44,7 @@ namespace MaxSudoku.Solver
         /// <returns>Index of the block containing the cell</returns>
         public int GetBlockIndex(int row, int col) =>
             (row / blockSize) * blockSize + (col / blockSize);
+        
 
         /// <summary>
         /// Updates the masks when placing or removing a digit.
@@ -65,6 +68,19 @@ namespace MaxSudoku.Solver
                 colMask[col] &= ~bit;
                 blockMask[GetBlockIndex(row, col)] &= ~bit;
             }
+        }
+
+
+        /// <summary>
+        /// Gets the mask of available digits for a cell.
+        /// </summary>
+        /// <param name="row">Row index of the cell</param>
+        /// <param name="col">Column index of the cell</param>
+        /// <returns>Bit mask where each set bit represents an available digit</returns>
+        public int GetAvailableDigits(int row, int col)
+        {
+            int used = rowMask[row] | colMask[col] | blockMask[GetBlockIndex(row, col)];
+            return fullMask & ~used;
         }
     }
     
