@@ -44,8 +44,48 @@ namespace MaxSudoku.Solver
             var (row, col, foundEmpty) = FindEmptyCell();
             if (!foundEmpty)
                 return true;
+
+            int availableDigitis = maskManager.GetAvailableDigits(row, col);
+            while (availableDigitis != 0)
+            {
+                // Extract least significant 1 bit.
+                int bit = availableDigitis & -availableDigitis;
+
+                // Clear the least significant 1 bit from mask.
+                availableDigitis &= availableDigitis - 1;
+
+                // Counts 0 bits from right till the first 1 bit (trailing zeros),
+                // Then adds 1 to get the digit.
+                int digit = BitOperations.TrailingZeroCount(bit) + 1;
+
+                PlaceDigit(row, col, digit);
+
+                if (SolveRecursive())
+                    return true;
+
+                RemoveDigit(row, col, digit);
+            }
             return false;
 
+        }
+
+
+        /// <summary>
+        /// Places a digit on the board and updates masks.
+        /// </summary>
+        private void PlaceDigit(int row, int col, int digit)
+        {
+            board.SetCell(row, col, digit);
+            maskManager.UpdateMasks(row, col, digit, isPlacing: true);
+        }
+
+        /// <summary>
+        /// Removes a digit from the board and updates masks.
+        /// </summary>
+        private void RemoveDigit(int row, int col, int digit)
+        {
+            board.SetCell(row, col, 0);
+            maskManager.UpdateMasks(row, col, digit, isPlacing: false);
         }
 
 
