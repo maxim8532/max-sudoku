@@ -45,10 +45,6 @@ namespace MaxSudoku.Board
             if (!validator.ValidateStringSize(data, BoardSize, BoardSize))
                 throw new InvalidInputException($"Input length must be {BoardSize * BoardSize} for a {BoardSize}x{BoardSize} Sudoku board.");
 
-            if (!validator.IsValidString(data))
-                throw new InvalidInputException("Input contains invalid characters for a Sudoku puzzle " +
-                    "(only digits, ASCII values within range, '.' or '0').");
-
             int inputIndex = 0;
             for (int row = 0; row < BoardSize; row++)
             {

@@ -9,12 +9,8 @@ namespace MaxSudoku.Board
     /// <summary>
     /// Defines validation methods for row/column-based boards.
     /// </summary>
-    public interface BoardValidator
+    public interface IBoardValidator
     {
-        /// <summary>
-        /// Checks if the given data string contains only valid characters. 
-        /// </summary>
-        bool IsValidString(string data);
 
         /// <summary>
         /// Checks if the given cell value are within the board's valid range.

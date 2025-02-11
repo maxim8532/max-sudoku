@@ -6,24 +6,8 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Board
 {
-    public class SudokuValidator : BoardValidator
+    public class SudokuValidator : IBoardValidator
     {
-
-
-        /// <summary>
-        /// Checks if the given data string contains only valid characters (digits, '.' or '0').
-        /// </summary>
-        /// <param name="data">String representing board data.</param>
-        /// <returns>True if all characters are valid for Sudoku. Otherwise, false.</returns>
-        public bool IsValidString(string data)
-        {
-            foreach (char c in data)
-            {
-                if (!(char.IsDigit(c) || c == '.' || c == '0'))
-                    return false;
-            }
-            return true;
-        }
 
         /// <summary>
         /// Checks if the given cell value are within the board's valid range.
