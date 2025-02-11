@@ -10,17 +10,10 @@ namespace MaxSudoku.Solver
 {
     public class SudokuSolver
     {
-        private int boardSize;
-        private int blockSize;
-        private int fullMask;  // A mask with all the bits set (will be used for complement).
-
-        /* Bit masks for each row, column, and block.
-           Bit (n-1) is set if digit n is already used. */
-        private int[] rowMask;
-        private int[] colMask;
-        private int[] blockMask;
-
+        private readonly int boardSize;
+        private readonly int blockSize;
         private readonly SudokuBoard board;
+        private readonly MaskManager maskManager;
 
         /// <summary>
         /// Constructor for a new instance of the SudokuSolver class.
@@ -37,11 +30,8 @@ namespace MaxSudoku.Solver
             if (blockSize * blockSize != boardSize)
                 throw new InvalidInputException("Board size must be a perfect square (for example: 9x9, 16x16).");
 
-            fullMask = (1 << boardSize) - 1;
-
-            rowMask = new int[boardSize];
-            colMask = new int[boardSize];
-            blockMask = new int[boardSize];
+            maskManager = new MaskManager(boardSize);
         }
+
     }
 }
