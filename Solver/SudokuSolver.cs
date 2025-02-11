@@ -3,6 +3,7 @@ using MaxSudoku.CustomExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,38 @@ namespace MaxSudoku.Solver
                 throw new InvalidInputException("Board size must be a perfect square (for example: 9x9, 16x16).");
 
             maskManager = new MaskManager(boardSize);
+            maskManager.UpdateFromBoard(board);  // Initializes board masks.
         }
 
+
+        /// <summary>
+        /// Recursive solving method that uses backtracking with bit manipulations.
+        /// </summary>
+        private bool SolveRecursive()
+        {
+            var (row, col, foundEmpty) = FindEmptyCell();
+            if (!foundEmpty)
+                return true;
+            return false;
+
+        }
+
+
+        /// <summary>
+        /// Finds the first empty cell in the board.
+        /// </summary>
+        /// <returns>Returns an empty cell if found (tuple). Otherwise, false</returns>
+        private (int row, int col, bool foundEmpty) FindEmptyCell()
+        {
+            for (int row = 0; row < boardSize; row++)
+            {
+                for (int col = 0; col < boardSize; col++)
+                {
+                    if (board.GetCell(row, col) == 0)
+                        return (row, col, true);
+                }
+            }
+            return (-1, -1, false);
+        }
     }
 }
