@@ -105,5 +105,16 @@ namespace MaxSudoku.Solver
             }
             return (-1, -1, false);
         }
+
+        /// <summary>
+        /// Validates the final solution using the board's validation rules.
+        /// </summary>
+        private void ValidateSolution()
+        {
+            if (board is SudokuBoard sudokuBoard)
+            {
+                sudokuBoard.ValidateBoard();
+            }
+        }
     }
 }
