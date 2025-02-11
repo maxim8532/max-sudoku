@@ -42,6 +42,30 @@ namespace MaxSudoku.Solver
         /// <returns>Index of the block containing the cell</returns>
         public int GetBlockIndex(int row, int col) =>
             (row / blockSize) * blockSize + (col / blockSize);
+
+        /// <summary>
+        /// Updates the masks when placing or removing a digit.
+        /// </summary>
+        /// <param name="row">Row index of the cell</param>
+        /// <param name="col">Column index of the cell</param>
+        /// <param name="digit">The digit being placed or removed</param>
+        /// <param name="isPlacing">True if placing a digit, false if removing</param>
+        public void UpdateMasks(int row, int col, int digit, bool isPlacing)
+        {
+            int bit = 1 << (digit - 1);
+            if (isPlacing)
+            {
+                rowMask[row] |= bit;
+                colMask[col] |= bit;
+                blockMask[GetBlockIndex(row, col)] |= bit;
+            }
+            else  // Removing a digit.
+            {
+                rowMask[row] &= ~bit;
+                colMask[col] &= ~bit;
+                blockMask[GetBlockIndex(row, col)] &= ~bit;
+            }
+        }
     }
     
 }
