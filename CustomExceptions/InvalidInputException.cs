@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku
+namespace MaxSudoku.CustomExceptions
 {
     /// <summary>
     /// An exception for invalid board inputs.
     /// </summary>
-    public class InvalidInputException:Exception
+    public class InvalidInputException : Exception
     {
-        public InvalidInputException(String message)
+        public InvalidInputException(string message)
         : base(message)
         {
 

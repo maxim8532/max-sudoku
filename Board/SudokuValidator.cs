@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku
+namespace MaxSudoku.Board
 {
     public class SudokuValidator : BoardValidator
     {
@@ -34,9 +34,10 @@ namespace MaxSudoku
         /// <returns>True if cell is within valid range. Otherwise, false.</returns>
         public bool ValidateCellRange(int cellValue, int minValue, int maxValue)
         {
-            if (cellValue < minValue || cellValue > maxValue){
+            if (cellValue < minValue || cellValue > maxValue)
+            {
                 return false;
-                }
+            }
             return true;
         }
 

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku
+namespace MaxSudoku.CustomExceptions
 {
     /// <summary>
     /// An exception for invalid board (doesn't follow Sudoku's rules).
     /// </summary>
     public class InvalidBoardException : Exception
     {
-        public InvalidBoardException(String message)
+        public InvalidBoardException(string message)
         : base(message)
         {
 

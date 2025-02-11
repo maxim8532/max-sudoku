@@ -4,10 +4,14 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using MaxSudoku.CustomExceptions;
 
-namespace MaxSudoku
+namespace MaxSudoku.Board
 {
-    internal class SudokuBoard : BoardGame
+    /// <summary>
+    /// Represents a sudoku board.
+    /// </summary>
+    public class SudokuBoard : BoardGame
     {
         private const int MIN_CELL_VALUE = 1;
         private SudokuValidator validator;
