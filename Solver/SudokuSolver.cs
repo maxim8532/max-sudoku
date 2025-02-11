@@ -37,6 +37,28 @@ namespace MaxSudoku.Solver
 
 
         /// <summary>
+        /// Attempts to solve the Sudoku puzzle using backtracking.
+        /// </summary>
+        /// <returns>True if a valid solution is found, false otherwise.</returns>
+        public bool Solve()
+        {
+            try
+            {
+                bool result = SolveRecursive();
+                if (result)
+                {
+                    ValidateSolution();
+                }
+                return result;
+            }
+            catch (InvalidBoardException)
+            {
+                return false;
+            }
+        }
+
+
+        /// <summary>
         /// Recursive solving method that uses backtracking with bit manipulations.
         /// </summary>
         private bool SolveRecursive()
