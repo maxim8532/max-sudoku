@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Solver
 {
-    public class SudokuSolver
+    public class SudokuSolver : IGameSolver
     {
         private readonly int boardSize;
         private readonly int blockSize;
