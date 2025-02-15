@@ -37,23 +37,45 @@ namespace MaxSudoku.Solver
         {
             bool progressMade = false;
 
-            // Initial full board scan.
+            /* Initial full board scan. */
             for (int row = 0; row < boardSize; row++)
             {
                 for (int col = 0; col < boardSize; col++)
                 {
-                    if (board.GetCell(row, col) == 0)
-                    {
-                        /* TODO: Add queue to track cells that should be checked.
-                         * if (makeMove(row, col))
-                        {
-                            progressMade = true;
-                            AddAffectedCells(row, col);
-                        } */
-                    }
+                    if (TryMove(row,col))
+                        progressMade = true;
                 }
             }
+
+            /* Make moves on the cells in the queue. */
+            while (cellsToProcess.Count > 0)
+            {
+                var (row, col) = cellsToProcess.Dequeue();
+                if (TryMove(row, col))
+                    progressMade = true;
+
+            }
             return progressMade;
+        }
+
+        /// <summary>
+        /// Tries to make a heuristic move.
+        /// </summary>
+        /// <param name="row">The row of the cell to check if a move can be made</param>
+        /// <param name="col">The column of the cell to check if a move can be made</param>
+        /// <returns>Return true if a move attempt was successful.</returns>
+        private bool TryMove(int row, int col)
+        {
+            if (board.GetCell(row, col) == 0)
+            {
+                if (MakeMove(row, col))
+                {
+                    AddAffectedCells(row, col);
+                    return true;
+                }
+            }
+            return false;
+
         }
 
 
@@ -62,13 +84,14 @@ namespace MaxSudoku.Solver
         /// places that digit. 
         /// </summary>
         /// <returns>Returns true if a digit was placed.</returns>
-        private bool makeMove(int row, int col)
+        private bool MakeMove(int row, int col)
         {
             int available = maskManager.GetAvailableDigits(row, col);
             if (available == 0)
                 return false;
 
             if (BitOperations.PopCount((uint)available) == 1)
+            // If there's only 1 available option.
             {
                 int digit = BitOperations.TrailingZeroCount(available) + 1;
                 // Record the move before placing.
@@ -87,7 +110,7 @@ namespace MaxSudoku.Solver
         /// </summary>
         /// <param name="row">Row of the placed cell.</param>
         /// <param name="col">Col of the placed cell</param>
-        private void addAffectedCells(int row, int col)
+        private void AddAffectedCells(int row, int col)
         {
             int blockSize = (int)Math.Sqrt(boardSize);
             int blockStartRow = (row / blockSize) * blockSize;
