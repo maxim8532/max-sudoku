@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Solver
 {
-    internal class NakedSinglesHeuristic
+    public class NakedSinglesHeuristic
     {
     }
 }
