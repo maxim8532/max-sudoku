@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.Solver.Heuristics
 {
     /// <summary>
     /// Implements the Naked Singles heuristic.

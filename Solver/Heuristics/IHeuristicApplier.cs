@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.Solver.Heuristics
 {
     public interface IHeuristicApplier
     {

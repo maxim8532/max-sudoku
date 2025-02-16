@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.Solver.Heuristics
 {
     /// <summary>
     /// Abstract base class for all Sudoku heuristics.
@@ -44,8 +44,8 @@ namespace MaxSudoku.Solver
         protected void AddAffectedCells(int row, int col)
         {
             int blockSize = (int)Math.Sqrt(boardSize);
-            int blockStartRow = (row / blockSize) * blockSize;
-            int blockStartCol = (col / blockSize) * blockSize;
+            int blockStartRow = row / blockSize * blockSize;
+            int blockStartCol = col / blockSize * blockSize;
 
             /* Add the the affected cells from the same row, col, and block. */
 
