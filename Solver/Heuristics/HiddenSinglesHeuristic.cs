@@ -55,5 +55,41 @@ namespace MaxSudoku.Solver.Heuristics
             return progress;
         }
 
+        /// <summary>
+        /// Applies hidden singles rule to a single column.
+        /// For each digit, if it appears as an available digit in exactly one cell in the column, the digit is placed.
+        /// </summary>
+        /// <returns>True if any progress has been made.</returns>
+        private bool ApplyHiddenSinglesColumn(int col)
+        {
+            bool progress = false;
+            for (int digit = 1; digit <= boardSize; digit++)
+            {
+                int count = 0;
+                int targetRow = -1;
+                int maskDigit = 1 << (digit - 1);
+                for (int row = 0; row < boardSize; row++)
+                {
+                    if (board.GetCell(row, col) == 0)
+                    {
+                        int available = maskManager.GetAvailableDigits(row, col);
+                        if ((available & maskDigit) != 0)
+                        {
+                            count++;
+                            targetRow = row;
+                        }
+                    }
+                }
+                if (count == 1)
+                {
+                    movesManager.RecordMove(new Move(targetRow, col, 0, digit));
+                    board.SetCell(targetRow, col, digit);
+                    maskManager.UpdateMasks(targetRow, col, digit, isPlacing: true);
+                    progress = true;
+                }
+            }
+            return progress;
+        }
+
     }
 }
