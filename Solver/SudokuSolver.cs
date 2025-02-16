@@ -71,10 +71,8 @@ namespace MaxSudoku.Solver
         /// </summary>
         private bool SolveRecursive()
         {
-
             if (!EveryCellHasAvailableDigitsCheck())
                 return false;
-
 
             var (row, col, foundEmpty) = FindEmptyCell();
             if (!foundEmpty)
@@ -111,6 +109,12 @@ namespace MaxSudoku.Solver
 
         }
 
+        /// <summary>
+        /// Checks if every cell has atleast 1 option,
+        /// thus reducing the solving time by pruning
+        /// the unsolvable branch.
+        /// </summary>
+        /// <returns>True if every cell has atleast 1 option.</returns>
         private bool EveryCellHasAvailableDigitsCheck()
         {
             for (int i = 0; i < boardSize; i++)
