@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Solver.Heuristics
 {
+    /// <summary>
+    /// Implements the Hidden Singles heuristic.
+    /// </summary>
     public class HiddenSinglesHeuristic : Heuristic
     {
         public HiddenSinglesHeuristic(SudokuBoard board, MaskManager maskManager, MovesManager movesManager)
@@ -14,9 +17,41 @@ namespace MaxSudoku.Solver.Heuristics
         {
         }
 
+        /// <summary>
+        /// Applies the Hidden Singles heuristic to the board.
+        /// Scans rows, columns, and blocks for hidden singles.
+        /// </summary>
+        /// <returns>Returns true if at least one cell was filled.</returns>
         public override bool Apply()
         {
-            throw new NotImplementedException();
+            bool progressMade = false;
+
+            // Apply hidden singles in rows.
+            for (int row = 0; row < boardSize; row++)
+            {
+                if (ApplyHiddenSinglesRow(row))
+                    progressMade = true;
+            }
+
+            // Apply hidden singles in columns.
+            for (int col = 0; col < boardSize; col++)
+            {
+                if (ApplyHiddenSinglesColumn(col))
+                    progressMade = true;
+            }
+
+            // Apply hidden singles in blocks.
+            int blockSize = (int)Math.Sqrt(boardSize);
+            for (int blockRow = 0; blockRow < blockSize; blockRow++)
+            {
+                for (int blockCol = 0; blockCol < blockSize; blockCol++)
+                {
+                    if (ApplyHiddenSinglesBlock(blockRow, blockCol))
+                        progressMade = true;
+                }
+            }
+
+            return progressMade;
         }
 
         /// <summary>
