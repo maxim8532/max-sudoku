@@ -71,6 +71,11 @@ namespace MaxSudoku.Solver
         /// </summary>
         private bool SolveRecursive()
         {
+
+            if (!EveryCellHasAvailableDigitsCheck())
+                return false;
+
+
             var (row, col, foundEmpty) = FindEmptyCell();
             if (!foundEmpty)
                 return true;
@@ -106,6 +111,25 @@ namespace MaxSudoku.Solver
 
         }
 
+        private bool EveryCellHasAvailableDigitsCheck()
+        {
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == 0)
+                    {
+                        if (maskManager.GetAvailableDigits(i, j) == 0)
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Applies all of the added heuristics in order.
+        /// </summary>
         private void ApplyHeuristics()
         {
             bool heuristicProgress;
