@@ -13,7 +13,7 @@ namespace MaxSudoku.Board
     /// </summary>
     public class SudokuBoard : BoardGame
     {
-        private const int MIN_CELL_VALUE = 1;
+        public const int MIN_CELL_VALUE = 1;
         private SudokuValidator validator;
 
         /// <summary>

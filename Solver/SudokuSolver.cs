@@ -74,7 +74,7 @@ namespace MaxSudoku.Solver
             if (!EveryCellHasAvailableDigitsCheck())
                 return false;
 
-            var (row, col, foundEmpty) = FindEmptyCell();
+            var (row, col, foundEmpty) = FindMinimumEmptyCell();
             if (!foundEmpty)
                 return true;
 
@@ -155,20 +155,45 @@ namespace MaxSudoku.Solver
         }
 
         /// <summary>
-        /// Finds the first empty cell in the board.
+        /// Finds the empty cell with the minimum value
+        /// of available digits in the board.
         /// </summary>
         /// <returns>Returns an empty cell if found (tuple). Otherwise, false</returns>
-        private (int row, int col, bool foundEmpty) FindEmptyCell()
+        private (int row, int col, bool foundEmpty) FindMinimumEmptyCell()
         {
+            int minCount = int.MaxValue;
+            int targetRow = -1;
+            int targetCol = -1;
+            bool foundEmpty = false;
+
             for (int row = 0; row < boardSize; row++)
             {
                 for (int col = 0; col < boardSize; col++)
                 {
                     if (board.GetCell(row, col) == 0)
-                        return (row, col, true);
+                    {
+                        foundEmpty = true;
+                        int available = maskManager.GetAvailableDigits(row, col);
+                        int count = BitOperations.PopCount((uint)available);
+
+                        /* If this cell has fewer options than the current minimum, update.*/
+                        if (count < minCount)
+                        {
+                            minCount = count;
+                            targetRow = row;
+                            targetCol = col;
+                        }
+
+                        /* Exit Early if a cell has only one option.*/
+                        if (minCount == 1)
+                        {
+                            return (targetRow, targetCol, true);
+                        }
+                    }
                 }
             }
-            return (-1, -1, false);
+
+            return (targetRow, targetCol, foundEmpty);
         }
 
         /// <summary>
