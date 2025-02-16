@@ -41,7 +41,7 @@ namespace MaxSudoku.Solver
         /// </summary>
         /// <param name="row">Row of the placed cell.</param>
         /// <param name="col">Col of the placed cell</param>
-        private void AddAffectedCells(int row, int col)
+        protected void AddAffectedCells(int row, int col)
         {
             int blockSize = (int)Math.Sqrt(boardSize);
             int blockStartRow = (row / blockSize) * blockSize;
