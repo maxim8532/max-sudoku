@@ -15,6 +15,8 @@ namespace MaxSudoku.Solver
         private readonly int blockSize;
         private readonly SudokuBoard board;
         private readonly MaskManager maskManager;
+        private readonly MovesManager movesManager;
+        private readonly SudokuHeuristics heuristics;
 
         /// <summary>
         /// Constructor for a new instance of the SudokuSolver class.
@@ -33,6 +35,8 @@ namespace MaxSudoku.Solver
 
             maskManager = new MaskManager(boardSize);
             maskManager.UpdateFromBoard(board);  // Initializes board masks.
+            movesManager = new MovesManager();
+            heuristics = new SudokuHeuristics(board, maskManager, movesManager);
         }
 
 
@@ -42,6 +46,7 @@ namespace MaxSudoku.Solver
         /// <returns>True if a valid solution is found, false otherwise.</returns>
         public bool Solve()
         {
+            ApplyHeuristics();
             try
             {
                 bool result = SolveRecursive();
@@ -68,6 +73,8 @@ namespace MaxSudoku.Solver
                 return true;
 
             int availableDigitis = maskManager.GetAvailableDigits(row, col);
+            int checkpoint = movesManager.Count; //Checkpoint when backtracking.
+
             while (availableDigitis != 0)
             {
                 // Extract least significant 1 bit.
@@ -80,15 +87,30 @@ namespace MaxSudoku.Solver
                 // Then adds 1 to get the digit.
                 int digit = BitOperations.TrailingZeroCount(bit) + 1;
 
+                movesManager.RecordMove(new Move(row, col, 0, digit));
                 PlaceDigit(row, col, digit);
+
+                /* Try heuristic moves again. */
+                ApplyHeuristics();
 
                 if (SolveRecursive())
                     return true;
 
-                RemoveDigit(row, col, digit);
+                /* If the branch fails, backtrack to checkpoint. */
+                movesManager.UndoMoves(checkpoint, board, maskManager);
             }
             return false;
 
+        }
+
+        private void ApplyHeuristics()
+        {
+            bool heuristicProgress;
+            do
+            {
+                heuristicProgress = heuristics.ApplyNakedSingles();
+            }
+            while (heuristicProgress);
         }
 
 
