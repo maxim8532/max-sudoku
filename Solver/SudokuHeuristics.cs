@@ -30,8 +30,8 @@ namespace MaxSudoku.Solver
 
         /// <summary>
         /// Applies all heuristics in sequence.
-        /// Returns true if any heuristic made progress.
         /// </summary>
+        /// <returns>Returns true if any heuristic made progress.</returns>
         public bool ApplyAll()
         {
             bool progressMade = false;

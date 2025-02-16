@@ -36,7 +36,8 @@ namespace MaxSudoku.Solver
             maskManager = new MaskManager(boardSize);
             maskManager.UpdateFromBoard(board);  // Initializes board masks.
             movesManager = new MovesManager();
-            heuristics = new SudokuHeuristics(board, maskManager, movesManager);
+            heuristics = new SudokuHeuristics();
+            heuristics.AddHeuristic(new NakedSinglesHeuristic(board, maskManager, movesManager));
         }
 
 
@@ -108,7 +109,7 @@ namespace MaxSudoku.Solver
             bool heuristicProgress;
             do
             {
-                heuristicProgress = heuristics.ApplyNakedSingles();
+                heuristicProgress = heuristics.ApplyAll();
             }
             while (heuristicProgress);
         }
@@ -122,16 +123,6 @@ namespace MaxSudoku.Solver
             board.SetCell(row, col, digit);
             maskManager.UpdateMasks(row, col, digit, isPlacing: true);
         }
-
-        /// <summary>
-        /// Removes a digit from the board and updates masks.
-        /// </summary>
-        private void RemoveDigit(int row, int col, int digit)
-        {
-            board.SetCell(row, col, 0);
-            maskManager.UpdateMasks(row, col, digit, isPlacing: false);
-        }
-
 
         /// <summary>
         /// Finds the first empty cell in the board.
