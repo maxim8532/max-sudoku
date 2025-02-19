@@ -35,6 +35,16 @@ namespace MaxSudoku.Solver
         }
 
         /// <summary>
+        /// Determines the default algorithm level based on board size.
+        /// </summary>
+        /// <param name="boardSize">The dimension of the board.</param>
+        /// <returns>The default AlgorithmLevel.</returns>
+        public static AlgorithmLevel GetDefaultAlgorithmLevel(int boardSize)
+        {
+            return boardSize <= 16 ? AlgorithmLevel.Level2 : AlgorithmLevel.Level3;
+        }
+
+        /// <summary>
         /// Applies all of the added heuristics in order.
         /// </summary>
         public static void ApplyHeuristics(SudokuHeuristics heuristics)
