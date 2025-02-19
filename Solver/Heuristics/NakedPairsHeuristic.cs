@@ -29,6 +29,64 @@ namespace MaxSudoku.Solver.Heuristics
         }
 
         /// <summary>
+        /// Processes all row groups for naked pairs.
+        /// </summary>
+        /// <returns>True if any row group forced a move.</returns>
+        private bool ProcessRowGroups()
+        {
+            bool progress = false;
+            for (int i = 0; i < boardSize; i++)
+            {
+                var nakedPairs = FindNakedPairs(rowGroups[i]);
+                foreach (var (pairMask, cell1, cell2) in nakedPairs)
+                {
+                    if (EliminatePairOptions(rowGroups[i], pairMask, cell1, cell2))
+                        progress = true;
+                }
+            }
+            return progress;
+        }
+
+        /// <summary>
+        /// Processes all column groups for naked pairs.
+        /// </summary>
+        /// <returns>True if any column group forced a move.</returns>
+        private bool ProcessColumnGroups()
+        {
+            bool progress = false;
+            for (int i = 0; i < boardSize; i++)
+            {
+                var nakedPairs = FindNakedPairs(columnGroups[i]);
+                foreach (var (pairMask, cell1, cell2) in nakedPairs)
+                {
+                    if (EliminatePairOptions(columnGroups[i], pairMask, cell1, cell2))
+                        progress = true;
+                }
+            }
+            return progress;
+        }
+
+        /// <summary>
+        /// Processes all block groups for naked pairs.
+        /// </summary>
+        /// <returns>True if any block group forced a move.</returns>
+        private bool ProcessBlockGroups()
+        {
+            bool progress = false;
+            for (int i = 0; i < boardSize; i++)
+            {
+                var nakedPairs = FindNakedPairs(blockGroups[i]);
+                foreach (var (pairMask, cell1, cell2) in nakedPairs)
+                {
+                    if (EliminatePairOptions(blockGroups[i], pairMask, cell1, cell2))
+                        progress = true;
+                }
+            }
+            return progress;
+        }
+
+
+        /// <summary>
         /// Initializes the groups (lists) for every row, column and block in the board.
         /// </summary>
         private void InitializeGroupCollections()
