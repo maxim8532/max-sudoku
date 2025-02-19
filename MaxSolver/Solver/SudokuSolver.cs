@@ -1,16 +1,15 @@
-﻿using MaxSudoku.Board;
-using MaxSudoku.CustomExceptions;
-using MaxSudoku.Solver.Heuristics;
-using static MaxSudoku.Solver.SudokuSolverUtils;
-using MaxSudoku.Solver;
+﻿using MaxSudoku.MaxSolver.Solver.Heuristics;
+using static MaxSudoku.MaxSolver.Solver.SudokuSolverUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using MaxSudoku.MaxSolver.CustomExceptions;
+using MaxSudoku.MaxSolver.Board;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     public class SudokuSolver : IGameSolver
     {

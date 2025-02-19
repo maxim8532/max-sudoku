@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Board
+namespace MaxSudoku.MaxSolver.Board
 {
     /// <summary>
     /// Represents a generic board game with rows, columns and a 2D array.

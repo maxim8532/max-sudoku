@@ -1,11 +1,12 @@
-﻿using MaxSudoku.Board;
+﻿using MaxSudoku.MaxSolver.Board;
+using MaxSudoku.MaxSolver.Solver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver.Heuristics
+namespace MaxSudoku.MaxSolver.Solver.Heuristics
 {
     /// <summary>
     /// Implements the Hidden Singles heuristic.
@@ -66,7 +67,7 @@ namespace MaxSudoku.Solver.Heuristics
             {
                 int count = 0;
                 int targetCol = -1;
-                int maskDigit = 1 << (digit - 1);
+                int maskDigit = 1 << digit - 1;
                 for (int col = 0; col < boardSize; col++)
                 {
                     if (board.GetCell(row, col) == 0)
@@ -102,7 +103,7 @@ namespace MaxSudoku.Solver.Heuristics
             {
                 int count = 0;
                 int targetRow = -1;
-                int maskDigit = 1 << (digit - 1);
+                int maskDigit = 1 << digit - 1;
                 for (int row = 0; row < boardSize; row++)
                 {
                     if (board.GetCell(row, col) == 0)
@@ -140,7 +141,7 @@ namespace MaxSudoku.Solver.Heuristics
             {
                 int count = 0;
                 int targetRow = -1, targetCol = -1;
-                int maskDigit = 1 << (digit - 1);
+                int maskDigit = 1 << digit - 1;
                 for (int r = startRow; r < startRow + blockSize; r++)
                 {
                     for (int c = startCol; c < startCol + blockSize; c++)

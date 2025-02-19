@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Board
+namespace MaxSudoku.MaxSolver.Board
 {
     /// <summary>
     /// Defines validation methods for row/column-based boards.

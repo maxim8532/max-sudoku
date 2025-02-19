@@ -1,11 +1,12 @@
-﻿using MaxSudoku.Board;
+﻿using MaxSudoku.MaxSolver.Board;
+using MaxSudoku.MaxSolver.Solver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver.Heuristics
+namespace MaxSudoku.MaxSolver.Solver.Heuristics
 {
     /// <summary>
     /// Abstract base class for all Sudoku heuristics.

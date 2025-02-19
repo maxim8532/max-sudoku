@@ -1,5 +1,5 @@
-﻿using MaxSudoku.Board;
-using MaxSudoku.Solver.Heuristics;
+﻿using MaxSudoku.MaxSolver.Solver.Heuristics;
+using MaxSudoku.MaxSolver.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     /// <summary>
     /// Manages a collection of heuristics and applies them.

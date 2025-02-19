@@ -1,11 +1,11 @@
-﻿using MaxSudoku.Board;
+﻿using MaxSudoku.MaxSolver.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     /// <summary>
     /// A mask manager that conatins methods that involve masks.
@@ -47,8 +47,8 @@ namespace MaxSudoku.Solver
         /// <param name="col">Column index of the cell</param>
         /// <returns>Index of the block containing the cell</returns>
         public int GetBlockIndex(int row, int col) =>
-            (row / blockSize) * blockSize + (col / blockSize);
-        
+            row / blockSize * blockSize + col / blockSize;
+
 
         /// <summary>
         /// Updates the masks when placing or removing a digit.
@@ -59,7 +59,7 @@ namespace MaxSudoku.Solver
         /// <param name="isPlacing">True if placing a digit, false if removing</param>
         public void UpdateMasks(int row, int col, int digit, bool isPlacing)
         {
-            int bit = 1 << (digit - 1);
+            int bit = 1 << digit - 1;
             if (isPlacing)
             {
                 rowMask[row] |= bit;
@@ -107,5 +107,5 @@ namespace MaxSudoku.Solver
             return fullMask & ~used;
         }
     }
-    
+
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     /// <summary>
     /// Specifies the algorithmic level to use.

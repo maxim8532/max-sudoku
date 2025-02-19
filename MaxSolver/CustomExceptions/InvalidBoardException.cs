@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.CustomExceptions
+namespace MaxSudoku.MaxSolver.CustomExceptions
 {
     /// <summary>
     /// An exception for invalid board (doesn't follow Sudoku's rules).

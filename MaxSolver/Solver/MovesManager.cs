@@ -1,11 +1,11 @@
-﻿using MaxSudoku.Board;
+﻿using MaxSudoku.MaxSolver.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     /// <summary>
     /// Records moves (both guesses and heuristic placements) so that they can be undone on backtracking.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxSudoku.UI
+namespace MaxSudoku.MaxSolver.UI
 {
     /// <summary>
     /// Provides utility methods for reading and writing Sudoku board strings and formatting boards.
@@ -58,11 +58,11 @@ namespace MaxSudoku.UI
             }
         }
 
-            /// <summary>
-            /// Writes the solved board string to a text file.
-            /// </summary>
-            /// <param name="boardString">The solved board string.</param>
-            public static void WriteBoardToFile(string boardString)
+        /// <summary>
+        /// Writes the solved board string to a text file.
+        /// </summary>
+        /// <param name="boardString">The solved board string.</param>
+        public static void WriteBoardToFile(string boardString)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter an existing name/path of file to write in it, or a new one: ");

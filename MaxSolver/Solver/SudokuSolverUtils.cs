@@ -1,13 +1,13 @@
-﻿using MaxSudoku.Board;
-using MaxSudoku.Solver.Heuristics;
+﻿using MaxSudoku.MaxSolver.Solver.Heuristics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using MaxSudoku.MaxSolver.Board;
 
-namespace MaxSudoku.Solver
+namespace MaxSudoku.MaxSolver.Solver
 {
     public class SudokuSolverUtils
     {

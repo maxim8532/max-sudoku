@@ -1,14 +1,8 @@
-﻿using MaxSudoku.Board;
-using MaxSudoku.CustomExceptions;
-using MaxSudoku.Solver;
-using MaxSudoku.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaxSudoku.MaxSolver.Board;
+using MaxSudoku.MaxSolver.CustomExceptions;
+using MaxSudoku.MaxSolver.Solver;
 
-namespace MaxSudoku.UI
+namespace MaxSudoku.MaxSolver.UI
 {
     /// <summary>
     /// A console based UI for the Sudoku solver.
@@ -90,7 +84,7 @@ namespace MaxSudoku.UI
             Console.WriteLine();
             Console.ResetColor();
             Console.WriteLine("Default: Uses board-based default (Level 2 for boards up to 16x16, Level 3 for larger boards).");
-            Console.WriteLine("Level 1: Only Naked Singles. (May be better for smaller boards or unsolvable ones!)");
+            Console.WriteLine("Level 1: Only Naked Singles. (May be better for easy boards and some unsolvable ones, can sometimes be surprisingly fast!)");
             Console.WriteLine("Level 2: Naked Singles and Hidden Singles (Good for most boards)");
             Console.WriteLine("Level 3: Naked Singles, Hidden Singles, and Naked Pairs (Makes a difference for harder boards, " +
                 "\nuse for board size 16x16 minimum).");
@@ -217,7 +211,7 @@ namespace MaxSudoku.UI
 
                 /* Determine algorithm level. */
                 AlgorithmLevel effectiveLevel = currentLevel == AlgorithmLevel.Default
-                    ? (size <= 16 ? AlgorithmLevel.Level2 : AlgorithmLevel.Level3)
+                    ? size <= 16 ? AlgorithmLevel.Level2 : AlgorithmLevel.Level3
                     : currentLevel;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nAlgorithm level in use: " + effectiveLevel);

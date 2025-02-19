@@ -1,5 +1,5 @@
-﻿using MaxSudoku.Board;
-using MaxSudoku.Solver;
+﻿using MaxSudoku.MaxSolver.Board;
+using MaxSudoku.MaxSolver.Solver;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,20 +7,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MaxSudoku.UI;
+using MaxSudoku.MaxSolver.UI;
+
 
 namespace MaxSudoku
 {
-    namespace MaxSudoku
+    internal class Program
     {
-        internal class Program
+        public static void Main(string[] args)
         {
-            public static void Main(string[] args)
-            {
-                UserInterface ui = new UserInterface();
-                ui.Run();
-            }
+            UserInterface ui = new UserInterface();
+            ui.Run();
         }
     }
-
 }
