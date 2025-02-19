@@ -40,15 +40,14 @@ namespace MaxSudoku.Solver
             {
                 Move move = moveStack.Pop();
 
-                // Restore board cell
                 board.SetCell(move.Row, move.Col, move.OldValue);
 
-                // Undo the mask update for the move we are reverting.
+                /* Undo the mask update for the move we are reverting. */
                 if (move.NewValue != 0)
                 {
                     maskManager.UpdateMasks(move.Row, move.Col, move.NewValue, isPlacing: false);
                 }
-                // If the previous value was non-zero, restore it in the mask.
+                /* If the previous value was non-zero, restore it in the mask. */
                 if (move.OldValue != 0)
                 {
                     maskManager.UpdateMasks(move.Row, move.Col, move.OldValue, isPlacing: true);

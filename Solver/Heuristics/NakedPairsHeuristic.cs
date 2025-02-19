@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MaxSudoku.Solver.Heuristics
 {
+    /// <summary>
+    /// Implements the Hidden Singles heuristic.
+    /// </summary>
     public class NakedPairsHeuristic : Heuristic
     {
         private readonly List<(int row, int col)>[] rowGroups;

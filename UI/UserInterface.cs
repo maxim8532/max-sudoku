@@ -92,7 +92,8 @@ namespace MaxSudoku.UI
             Console.WriteLine("Default: Uses board-based default (Level 2 for boards up to 16x16, Level 3 for larger boards).");
             Console.WriteLine("Level 1: Only Naked Singles. (May be better for smaller boards or unsolvable ones!)");
             Console.WriteLine("Level 2: Naked Singles and Hidden Singles (Good for most boards)");
-            Console.WriteLine("Level 3: Naked Singles, Hidden Singles, and Naked Pairs (Makes a difference for harder boards).");
+            Console.WriteLine("Level 3: Naked Singles, Hidden Singles, and Naked Pairs (Makes a difference for harder boards, " +
+                "\nuse for board size 16x16 minimum).");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nChanging the algorithm level is optional.");
             Console.ResetColor();

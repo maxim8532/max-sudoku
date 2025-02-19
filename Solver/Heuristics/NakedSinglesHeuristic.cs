@@ -26,7 +26,7 @@ namespace MaxSudoku.Solver.Heuristics
         {
             bool progressMade = false;
 
-            // Initial full board scan.
+            /* Initial full board scan. */
             for (int row = 0; row < boardSize; row++)
             {
                 for (int col = 0; col < boardSize; col++)
@@ -36,7 +36,7 @@ namespace MaxSudoku.Solver.Heuristics
                 }
             }
 
-            // Process the cells in the queue.
+            /* Process the cells in the queue. */
             while (cellsToProcess.Count > 0)
             {
                 var (row, col) = cellsToProcess.Dequeue();
@@ -78,8 +78,10 @@ namespace MaxSudoku.Solver.Heuristics
             /* If there's only 1 available option. */
             {
                 int digit = BitOperations.TrailingZeroCount(available) + 1;
-                // Record the move before placing.
+
+                /* Record the move before placing. */
                 movesManager.RecordMove(new Move(row, col, 0, digit));
+
                 board.SetCell(row, col, digit);
                 maskManager.UpdateMasks(row, col, digit, isPlacing: true);
                 return true;
