@@ -130,5 +130,42 @@ namespace MaxSudoku.Solver.Heuristics
             return nakedPairs;
 
         }
+
+        /// <summary>
+        /// For a given naked pair (represented by a avaiable digits mask that appears in exactly 2 cells),
+        /// eliminates those avaiable digits from every other empty cell in the group.
+        /// If the elimination forces a cell to have exactly one avaiable option, that move is applied.
+        /// </summary>
+        /// <param name="group">The group of cells to process.</param>
+        /// <param name="pairMask">The avaiable digits mask representing the naked pair.</param>
+        /// <param name="cell1">The first cell of the pair.</param>
+        /// <param name="cell2">The second cell of the pair.</param>
+        /// <returns>True if a forced move was applied. Otherwise, false.</returns>
+        private bool EliminatePairOptions(List<(int row, int col)> group, int pairMask, (int row, int col) cell1, (int row, int col) cell2)
+        {
+            bool progressMade = false;
+
+            foreach (var (row, col) in group)
+            {
+                if ((row, col) == cell1 || (row, col) == cell2 || board.GetCell(row, col) != 0)
+                    continue;
+
+                int available = maskManager.GetAvailableDigits(row, col);
+                int newAvailable = available & ~pairMask;
+
+                /* Forced move */
+                if (newAvailable != available && BitOperations.PopCount((uint)newAvailable) == 1)
+                {
+                    int digit = BitOperations.TrailingZeroCount(newAvailable) + 1;
+                    movesManager.RecordMove(new Move(row, col, 0, digit));
+                    board.SetCell(row, col, digit);
+                    maskManager.UpdateMasks(row, col, digit, isPlacing: true);
+                    AddAffectedCells(row, col);
+                    progressMade = true;
+                }
+            }
+
+            return progressMade;
+        }
     }
 }
