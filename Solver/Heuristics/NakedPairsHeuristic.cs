@@ -47,6 +47,26 @@ namespace MaxSudoku.Solver.Heuristics
                     columnGroups[col].Add((row, col));
             }
 
+            /* Initialize block groups. */
+            int groupSize = (int)Math.Sqrt(boardSize);
+            int groupIndex = 0;
+            for (int gr = 0; gr < groupSize; gr++)
+            {
+                for (int gc = 0; gc < groupSize; gc++)
+                {
+                    blockGroups[groupIndex] = new List<(int row, int col)>(boardSize);
+                    int startRow = gr * groupSize;
+                    int startCol = gc * groupSize;
+                    for (int r = 0; r < groupSize; r++)
+                    {
+                        for (int c = 0; c < groupSize; c++)
+                        {
+                            blockGroups[groupIndex].Add((startRow + r, startCol + c));
+                        }
+                    }
+                    groupIndex++;
+                }
+            }
         }
     }
 }
