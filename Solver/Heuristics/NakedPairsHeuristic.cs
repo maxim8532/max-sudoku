@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace MaxSudoku.Solver.Heuristics
             rowGroups = new List<(int row, int col)>[boardSize];
             columnGroups = new List<(int row, int col)>[boardSize];
             blockGroups = new List<(int row, int col)>[boardSize];
+            InitializeGroupCollections();
         }
 
         public override bool Apply()
@@ -36,7 +38,9 @@ namespace MaxSudoku.Solver.Heuristics
             {
                 rowGroups[row] = new List<(int row, int col)>(boardSize);
                 for (int col = 0; col < boardSize; col++)
+                {
                     rowGroups[row].Add((row, col));
+                }
             }
 
             /* Initialize column groups. */
@@ -44,7 +48,9 @@ namespace MaxSudoku.Solver.Heuristics
             {
                 columnGroups[col] = new List<(int row, int col)>(boardSize);
                 for (int row = 0; row < boardSize; row++)
+                {
                     columnGroups[col].Add((row, col));
+                }
             }
 
             /* Initialize block groups. */
@@ -67,6 +73,43 @@ namespace MaxSudoku.Solver.Heuristics
                     groupIndex++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Scans a group and returns a list of naked pairs.
+        /// Each naked pair is represented as a tuple containing the available options mask and the two cells that share it.
+        /// </summary>
+        /// <param name="group">The group of cells to scan.</param>
+        /// <returns>A list of naked pair tuples.</returns>
+        private List<(int pairMask, (int row, int col) cell1, (int row, int col) cell2)> FindNakedPairs(List<(int row, int col)> group)
+        {
+            /* detect if a pair has been seen already */
+            var pairsByMask = new Dictionary<int, (int row, int col)>();
+
+            /* list that stores complete naked pair entries */
+            var nakedPairs = new List<(int pairMask, (int row, int col) cell1, (int row, int col) cell2)>();
+
+            foreach (var (row, col) in group)
+            {
+                if (board.GetCell(row, col) != 0)
+                    continue;
+
+                int avaiableDigitseMask = maskManager.GetAvailableDigits(row, col);
+                if (BitOperations.PopCount((uint)avaiableDigitseMask) == 2)
+                {
+                    if (pairsByMask.TryGetValue(avaiableDigitseMask, out var firstCell))
+                    {
+                        nakedPairs.Add((avaiableDigitseMask, firstCell, (row, col)));
+                    }
+                    else
+                    {
+                        pairsByMask[avaiableDigitseMask] = (row, col);
+                    }
+                }
+            }
+
+            return nakedPairs;
+
         }
     }
 }
