@@ -25,5 +25,28 @@ namespace MaxSudoku.Solver.Heuristics
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Initializes the groups (lists) for every row, column and block in the board.
+        /// </summary>
+        private void InitializeGroupCollections()
+        {
+            /* Initialize row groups. */
+            for (int row = 0; row < boardSize; row++)
+            {
+                rowGroups[row] = new List<(int row, int col)>(boardSize);
+                for (int col = 0; col < boardSize; col++)
+                    rowGroups[row].Add((row, col));
+            }
+
+            /* Initialize column groups. */
+            for (int col = 0; col < boardSize; col++)
+            {
+                columnGroups[col] = new List<(int row, int col)>(boardSize);
+                for (int row = 0; row < boardSize; row++)
+                    columnGroups[col].Add((row, col));
+            }
+
+        }
     }
 }
