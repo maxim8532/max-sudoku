@@ -1,17 +1,26 @@
-﻿using System;
+﻿using MaxSudoku.Board;
+using MaxSudoku.Solver;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MaxSudoku.UI;
 
 namespace MaxSudoku
 {
-    internal class Program
+    namespace MaxSudoku
     {
-        public static void Main(String[] args)
+        internal class Program
         {
-
-            Console.WriteLine("Main Method");
+            public static void Main(string[] args)
+            {
+                UserInterface ui = new UserInterface();
+                ui.Run();
+            }
         }
     }
+
 }
