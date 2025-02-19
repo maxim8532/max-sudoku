@@ -33,7 +33,16 @@ namespace MaxSudoku.Solver.Heuristics
         /// </summary>
         private void InitializeGroupCollections()
         {
-            /* Initialize row groups. */
+            InitializeRowGroups();
+            InitializeColumnGroups();
+            InitializeblockGroups();
+        }
+
+        /// <summary>
+        /// Initialize row groups.
+        /// </summary>
+        private void InitializeRowGroups()
+        {
             for (int row = 0; row < boardSize; row++)
             {
                 rowGroups[row] = new List<(int row, int col)>(boardSize);
@@ -42,8 +51,13 @@ namespace MaxSudoku.Solver.Heuristics
                     rowGroups[row].Add((row, col));
                 }
             }
+        }
 
-            /* Initialize column groups. */
+        /// <summary>
+        /// Initialize column groups.
+        /// </summary>
+        private void InitializeColumnGroups()
+        {
             for (int col = 0; col < boardSize; col++)
             {
                 columnGroups[col] = new List<(int row, int col)>(boardSize);
@@ -52,8 +66,13 @@ namespace MaxSudoku.Solver.Heuristics
                     columnGroups[col].Add((row, col));
                 }
             }
+        }
 
-            /* Initialize block groups. */
+        /// <summary>
+        /// Initialize block groups.
+        /// </summary>
+        private void InitializeblockGroups()
+        {
             int groupSize = (int)Math.Sqrt(boardSize);
             int groupIndex = 0;
             for (int gr = 0; gr < groupSize; gr++)
