@@ -41,7 +41,6 @@ namespace MaxSudoku.Solver
             movesManager = new MovesManager();
             heuristics = new SudokuHeuristics();
             heuristics.AddHeuristic(new NakedSinglesHeuristic(board, maskManager, movesManager));
-            heuristics.AddHeuristic(new HiddenSinglesHeuristic(board, maskManager, movesManager));
         }
 
         /// <summary>
