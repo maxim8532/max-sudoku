@@ -23,9 +23,17 @@ namespace MaxSudoku.Solver.Heuristics
             InitializeGroupCollections();
         }
 
+        /// <summary>
+        /// Applies the naked pairs heuristic by processing row, column, and block groups.
+        /// </summary>
+        /// <returns>True if at least one forced move was applied.</returns>
         public override bool Apply()
         {
-            throw new NotImplementedException();
+            bool progressMade = false;
+            progressMade |= ProcessRowGroups();
+            progressMade |= ProcessColumnGroups();
+            progressMade |= ProcessBlockGroups();
+            return progressMade;
         }
 
         /// <summary>
