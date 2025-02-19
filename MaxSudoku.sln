@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxSudoku", "MaxSudoku.csproj", "{6BA83E9C-FBB4-4544-87EF-B2606E9812C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxSudokuTests", "..\MaxSudokuTests\MaxSudokuTests.csproj", "{B2C13DBC-2A40-4403-9A58-DCA6198E44C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxSudokuTest", "..\MaxSudokuTest\MaxSudokuTest.csproj", "{973E5BE5-7D0E-4F2C-92A6-CD7713859902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6BA83E9C-FBB4-4544-87EF-B2606E9812C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA83E9C-FBB4-4544-87EF-B2606E9812C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA83E9C-FBB4-4544-87EF-B2606E9812C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2C13DBC-2A40-4403-9A58-DCA6198E44C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2C13DBC-2A40-4403-9A58-DCA6198E44C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2C13DBC-2A40-4403-9A58-DCA6198E44C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2C13DBC-2A40-4403-9A58-DCA6198E44C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973E5BE5-7D0E-4F2C-92A6-CD7713859902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973E5BE5-7D0E-4F2C-92A6-CD7713859902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973E5BE5-7D0E-4F2C-92A6-CD7713859902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973E5BE5-7D0E-4F2C-92A6-CD7713859902}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
